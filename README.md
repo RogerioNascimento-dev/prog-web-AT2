@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Curso: Sistemas de Informação
+Disciplina: Programação Web
+Docente: Pablo Ricardo Roxo Silva
+Período letivo: 2021.1
+Aluno: Rogério de Oliveira Nascimento
+# Especificação do Trabalho
 
-## Getting Started
+- Criar o site de uma pizzaria com logo,mensagem de bem vindo e mensagem de instruções
+- Criar apenas uma página quer será a de seleção de sabores da pizza
+- A página deve obter os sabores da API da pizzaria: Link: https://pizzaria.roxo.dev.br/
+- A lista vem ordenada alfabeticamente pelo nome do sabor
+- Após obter os sabores, o site deve apresentar a lista em formato de tabela
+- O usuário deverá escolher quantos sabores ele quer (1, 2 ou 3)
+- Após escolher a quantidade de sabores, abrir a quantidade de campos para escolher cada sabor
+- Escolhidos o(s) sabor(es), o sistema deverá calcular proporcionalmente o(s) sabor(es) e dar o preço final da pizza no final de tudo, em formato de texto e da moeda Real (por exemplo, R$38,25)
 
-First, run the development server:
+# Execução do trabalho
+Escolhi utilizar [ReactJs](https://pt-br.reactjs.org/) junto ao framework  [Next.js](https://nextjs.org/) por ser umas das tecnologias de desenvolvimento web mais atuais e são as que venho estudando mais a fundo.
 
+# [Acessar Demo ](https://pt-br.reactjs.org/)
+
+### Caso queira executar em sua máquina siga as instruções abaixo.
+
+- Você vai precisar ter o [NODEjs](https://nodejs.org/en/) instalado para prosseguir.
+
+Primeiro clone o repositório e acesse a pasta criada contendo o projeto:
+```bash
+git clone https://github.com/RogerioNascimento-dev/prog-web-AT2.git
+# em seguida acesse a pasta do projeto
+cd prog-web-AT2
+```
+
+Agora você precisa instalar as dependências do projeto.
+```bash
+# execute o comando
+npm install
+```
+Tendo sucesso até aqui agora é simples, basta excutar o comando para iniciar o projeto e ele ficará disponível para acessar localmente.
 ```bash
 npm run dev
-# or
+# ou se estiver usando yarn como gerenciador de dependências
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Abra [http://localhost:3000](http://localhost:3000) com seu navegador para ver o site funcionando.

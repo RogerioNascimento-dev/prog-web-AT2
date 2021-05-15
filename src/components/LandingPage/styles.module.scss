@@ -1,94 +1,136 @@
-.container{  
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  max-width: 960px;
-  min-height: 100vh;  
-  margin: 0 auto;    
-}
-.containerLeft{
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  img{
-    width: 200px;
-    margin-bottom: 10px;
-  }
-  h1,h2,p{
-    color: var(--primary);
-  }
-  h1{
-    font-size: 1rem;
-    font-weight: 100;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  }  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    color: var(--primary);
-  }
-  table tr {
-    border-bottom: 2px solid rgba(0,0,0,0.5);    
-  }  
-  .tdAlignLeft{
-    text-align: left !important;
-    padding: 5px 0px;
-  }
-  .tdAlignRight{
-    text-align: right !important;
-    padding: 5px 0px;
-  }
-}
-  
-
-.containerRight, .containerRequest{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 20px;
-  img{
-    width: 250px;
-    margin-bottom: 20px;
-  }
-  p{
-    margin-bottom: 10px;
-    font-size: 1rem;
-    color: var(--primary);
-  }
-  button{        
-     border: none;    
-     background-color: var(--primary);
-     color: #FFF;    
-     cursor: pointer;
-     box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-     transition: background-color 0.5s;
-  }
-  button:hover{
-    background-color: #f56269;
-  }
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 960px;
+    min-height: 100vh;
+    margin: 0 auto;
 }
 
-.containerRequest{
-  .containerActions{
-    button{
-      padding:5px;
+.containerLeft {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    img {
+        width: 200px;
+        margin-bottom: 10px;
     }
-    button.add{
-      background-color: green;
-      color: #FFF;
+    h1,
+    h2,
+    p {
+        color: var(--primary);
     }
-    button.add:hover{
-      background-color: rgb(88, 122, 88);      
+    h1 {
+        font-size: 1rem;
+        font-weight: 100;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    select{
-      padding: 5px 5px;
-      border: solid 2px #d8d8d8;
-      background-color: white;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        color: var(--primary);
     }
-  }
-  img{
-    width: 120px;    
-  }
+    table tr {
+        border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    }
+    .tdAlignLeft {
+        text-align: left !important;
+        padding: 5px 0px;
+    }
+    .tdAlignRight {
+        text-align: right !important;
+        padding: 5px 0px;
+    }
+}
+
+.containerRight,
+.containerRequest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    img {
+        width: 250px;
+        margin-bottom: 20px;
+    }
+    p {
+        margin-bottom: 10px;
+        font-size: 1rem;
+        color: var(--primary);
+    }
+    button {
+        border: none;
+        background-color: var(--primary);
+        color: #FFF;
+        cursor: pointer;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        transition: background-color 0.5s;
+    }
+    button:hover {
+        background-color: #f56269;
+    }
+}
+
+.containerRequest {
+    .containerActions {
+        button {
+            padding: 5px;
+        }
+        button.add {
+            background-color: green;
+            color: #FFF;
+        }
+        button.add:hover {
+            background-color: rgb(88, 122, 88);
+        }
+        select {
+            padding: 5px 5px;
+            border: solid 2px #d8d8d8;
+            background-color: white;
+        }
+    }
+    img {
+        width: 120px;
+    }
+}
+
+.containerSelectedList {
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 306px;
+    border: solid 1px var(--primary);
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    tdAlignLeft {
+        text-align: left !important;
+        padding: 5px 0px;
+    }
+    .tdAlignRight {
+        text-align: right !important;
+        padding: 5px 0px;
+    }
+    button {
+        color: red;
+        background: none;
+        margin-left: 10px;
+        box-shadow: none;
+    }
+    button:hover {
+        background: none;
+    }
+    tfoot {
+        border-top: 2px solid #CCC;
+        margin-top: 10px;
+    }
+    p {
+        font-size: 1.4rem;
+    }
 }

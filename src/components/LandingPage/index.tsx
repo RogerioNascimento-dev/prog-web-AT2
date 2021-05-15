@@ -2,8 +2,10 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import styles from './styles.module.scss';
 import { Button, ButtonGroup, Form, FormControl, InputGroup } from 'react-bootstrap';
-
+import { BsTrash } from "react-icons/bs";
+import Swal from 'sweetalert2';
 export interface Imenus{
+  key:number,
   id:number,
   nome:string,
   valor:string
@@ -11,27 +13,84 @@ export interface Imenus{
 
 export function LandingPage(){  
   const [request,setRequest] = useState(false);
-  const [menu,setMenu] = useState<Imenus[]>([]);
+  const [menu,setMenu] = useState<Imenus[]>([]);    
   const [menuSelected,setMenuSelected] = useState<Imenus[]>([]);
-  
-  const handleRequest = ()=>{
-    setRequest(!request);
-  }
+  const [itemMenuSelected,setItemMenuSelected] = useState(0);
+
   useEffect(()=>{
     getMenus();    
   },[]);
 
-  const getMenus  = async () =>{
-    const response = await axios.get('https://pizzaria.roxo.dev.br/');         
-    setMenu(response.data);     
+  const handleRequest = ()=>{
+    if(request == true){
+      setMenuSelected([]);
+    }
+    setRequest(!request);
+  } 
+  const getRandomNumber = ()=>{
+    return Math.floor(Math.random() * 10000);
   }
-  const handleMenuSelected=(id =2) =>{
-    let menuTemp = menuSelected;
-    let selecionado = menu.find((m)=> m.id == id);
-    menuTemp.push(selecionado);
-    setMenuSelected(menuTemp);
+
+  const getMenus  = async () =>{
+    const response = await axios.get('https://pizzaria.roxo.dev.br/');       
+    let dataGeneral = [];
+    response.data.map((resp)=>{
+      dataGeneral.push({
+        key: getRandomNumber(),
+        id:resp.id,
+        nome:resp.nome,
+        valor:resp.valor
+      })
+    })    
+    setMenu(dataGeneral);              
+  }
+  const handleMenuSelected=() =>{        
+    if(itemMenuSelected == 0){      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Selecione um sabor antes de clicar em adicionar.',        
+      })
+      return;
+    } 
+    if(menuSelected.findIndex(e=>e.id == itemMenuSelected) >= 0){      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Este sabor já foi adicionado anteriormente.',        
+      })
+      return;
+    }
+
+    let itemSelecionado = menu.find((m)=> m.id == itemMenuSelected)
+    let newMenuSelected = [...menuSelected,itemSelecionado];   
+    
+    setMenuSelected(newMenuSelected);    
+    calculateSubTotal(newMenuSelected);
   }
   
+  const handleChangeSelect = (event)=>{ 
+    setItemMenuSelected(event.target.value);
+  }
+
+  const handleRemoveItem = (key) =>{    
+    const newMenuSelected = menuSelected.filter(e => e.key != key);
+    setMenuSelected(newMenuSelected);
+    calculateSubTotal(newMenuSelected);
+  }
+
+  const calculateSubTotal = (dados)=>{             
+      let newData = [];      
+      dados.map((e)=>{        
+        newData.push({
+          key: getRandomNumber(),
+          id: e.id,
+          nome: e.nome,
+          valor: `${parseFloat(menu.find((teste) => teste.id == e.id).valor) / dados.length}`
+        })
+      })      
+      setMenuSelected(newData)
+  }
 
   return(
     <>
@@ -50,7 +109,8 @@ export function LandingPage(){
               {menu.map((item) =>{
                 return(<tr key={item.id}>
                   <td className={`${styles.tdAlignLeft}`}>{item.nome}</td>                  
-                  <td className={`${styles.tdAlignRight}`}>{parseFloat(item.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+                  <td className={`${styles.tdAlignRight}`}>
+                    {parseFloat(item.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
                 </tr>)
               })}              
             </tbody>
@@ -68,25 +128,46 @@ export function LandingPage(){
       <div className={`${styles.containerRequest}`}>   
       <img src="/img/pizzaiolo.png"/> 
       <div className={`${styles.containerActions}`}>
-       <select>
-         <optgroup label="Sabores das pizzas">    
+       <select onChange={handleChangeSelect}>        
+       <option key={0} value={0}>-- Selecione --</option> 
          {menu.map((item) =>{
-           return(<option value={item.id}>{item.nome}</option>)
-         })}                  
-         </optgroup>
+           return(<option key={item.key} value={item.id}>{item.nome}</option>)
+         })}                           
        </select>
         <button onClick={handleMenuSelected} className={`${styles.add}`}>Adicionar</button>
         <button onClick={handleRequest}>Cancelar</button>
-       </div> 
-
-       <ul>
-         {menuSelected.map((item)=>{
-           return(<li>item.nome</li>)
-         })}         
-      </ul> 
-      </div>
-      }
+       </div>  
       
+         <div className={`${styles.containerSelectedList}`}>
+         <p>Sabores Selecionados</p>         
+             <table>
+            <thead>
+              <tr>
+                <th className={`${styles.tdAlignLeft}`}>Sabor</th>                
+                <th className={`${styles.tdAlignRight}`}>Sub Total</th>
+              </tr>
+            </thead>
+            <tbody>              
+              {menuSelected.map((item) =>{
+                return(<tr key={item.key}>
+                  <td className={`${styles.tdAlignLeft}`}>{item?.nome}</td>                  
+                  <td className={`${styles.tdAlignRight}`}>{parseFloat(item?.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})} 
+                  <button onClick={() =>handleRemoveItem(item.key)} title="Remover"><BsTrash /></button></td>
+                </tr>)
+              })}              
+            </tbody>
+            {menuSelected.length > 0 && (
+              <tfoot>
+              <tr>
+                <td className={`${styles.tdAlignLeft}`}>Total</td>
+                <td className={`${styles.tdAlignRight}`}>{menuSelected.reduce((a,b) =>{return a+= parseFloat(b.valor)},0).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+              </tr>
+            </tfoot>
+            )}            
+          </table>            
+        </div>         
+      </div>
+      }      
     </section>
     </>
   )

@@ -17,7 +17,7 @@ Aluno: Rogério de Oliveira Nascimento
 # Execução do trabalho
 Escolhi utilizar [ReactJs](https://pt-br.reactjs.org/) junto ao framework  [Next.js](https://nextjs.org/) por ser umas das tecnologias de desenvolvimento web mais atuais e são as que venho estudando mais a fundo.
 
-# [Acessar Demo ](https://pt-br.reactjs.org/)
+# [Acessar Demo ](https://bsi-pizzaria.vercel.app/)
 
 ### Caso queira executar em sua máquina siga as instruções abaixo.
 

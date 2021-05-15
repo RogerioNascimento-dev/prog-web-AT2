@@ -49,7 +49,8 @@ export function LandingPage(){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Selecione um sabor antes de clicar em adicionar.',        
+        text: 'Selecione um sabor antes de clicar em adicionar.',  
+        confirmButtonColor: '#f56269',              
       })
       return;
     } 
@@ -57,7 +58,8 @@ export function LandingPage(){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Este sabor já foi adicionado anteriormente.',        
+        text: 'Este sabor já foi adicionado anteriormente.', 
+        confirmButtonColor: '#f56269',       
       })
       return;
     }
